@@ -1,90 +1,75 @@
 # Privacy Policy for I Hate Tabs
 
-_Last updated: December 2, 2025_
+_Last updated: November 20, 2026_
 
-## Overview
+**Short version:** your saved tabs stay in your browser, unless you turn on sync. The extension sends usage statistics, and they never include your tabs. We sell nothing to anyone.
 
-I Hate Tabs is committed to protecting your privacy. This privacy policy explains how we handle your data when you use our Chrome extension.
+## What the extension stores on your computer
 
-## Data Collection
+- The address, title, and icon address of each tab that you save.
+- The names and dates of your sessions, and your settings.
 
-**We do NOT collect any personal data.** I Hate Tabs operates entirely on your local device.
+The extension keeps this data in your browser, in Chrome's storage for extensions. It reads your tabs only when you save them. It does not watch the pages that you visit.
 
-### What We Store Locally
+## Optional sync
 
-- **Tab Information**: URLs, titles, and favicon URLs of tabs you choose to save
-- **Session Data**: Timestamps and custom names for your saved tab sessions
-- **User Preferences**: Extension settings and configurations
+Sync is off until you create an account and sign in. When you sign in:
 
-All data is stored locally in your browser using Chrome's storage API and never transmitted to external servers.
+- Your email address and password go to Firebase Authentication, a Google service, to sign you in.
+- Your saved sessions, tabs, and settings go to Cloud Firestore, a Google service, so that your other computers can get them.
 
-## Data Usage
+Only your account can read its cloud data. To delete it, open Account Settings and choose **Delete Cloud Data**. When you sign out, sync stops, and your tabs stay on your computer.
 
-The locally stored data is used exclusively to:
+## Usage statistics
 
-- Display your saved tabs and sessions
-- Restore tabs when requested
-- Maintain your extension preferences
-- Generate smart session names based on tab content
+The extension sends usage events to Google Analytics. For example: "a session was saved with 12 tabs", or "the sessions page was opened". Each event carries a random ID for your installation, and counts such as the number of saved sessions and tabs. The events never include the addresses or titles of your tabs, or your email address. When an error occurs, the extension sends the error message, so that we can fix the bug. There is no setting to turn usage statistics off yet.
 
-## Data Sharing and Third-Party Services
+## Site icons
 
-**We do NOT share your personal data with advertisers or data brokers.**
+To show site icons, the sessions page loads the icon address of each saved tab. That address usually belongs to the site itself. When you import tabs or refresh icons, the extension also asks Google's favicon service (`www.google.com/s2/favicons`) for icons. Each of those requests sends the domain name of one site, for example `github.com`.
 
-However, the extension interacts with the following third-party service for specific functionality:
+## Session names
 
-- **Google Favicon Service**: When you import tabs from text or other sources where icons are missing, the extension may fetch favicons from Google's service (`www.google.com/s2/favicons`). This involves sending the domain name of the saved tab to Google to retrieve the icon image. This only occurs during import or manual refresh operations.
+Smart naming runs on your computer. It does not send your tabs to any AI service.
 
-## AI and Smart Features
+## The website
 
-- **AI Session Naming**: The "AI" naming feature runs **entirely locally** on your device using pattern matching algorithms. No tab data is sent to OpenAI, Google, or any other AI provider to generate session names.
+The website at ihatetabs.com has no cookies, no analytics, and no third-party scripts or fonts. Its hosting provider processes each request to deliver the pages and to protect them from attacks.
 
-## Data Security
+## What we do not do
 
-Your data security is ensured by:
+- We do not sell your data, or share it with advertisers or data brokers.
+- We do not use your data for anything other than the features in this policy.
+- We do not use your data to decide creditworthiness or for lending.
 
-- **Local Storage**: All data remains on your device
-- **No Network Transmission**: The extension does not send data over the internet
-- **Browser Protection**: Data is protected by Chrome's built-in security measures
+## Your control
 
-## Data Retention
+- Delete a tab, a session, or everything (Settings, then **Clear All Data**).
+- Export your data to a JSON file at any time (Settings, then **Export JSON**).
+- Delete your cloud data, or never turn on sync.
+- Uninstall the extension to remove its data from your browser.
 
-- Data persists until you manually delete it or uninstall the extension
-- You can export your data for backup purposes
-- You can clear all data through the extension interface
+## Permissions
 
-## User Control
+- **tabs**: read the address and title of your tabs when you save them, and open them again.
+- **storage**: keep your sessions and settings in your browser.
+- **activeTab**: work with the current window when you click the toolbar button.
+- **contextMenus**: add "Save all tabs" and "Show hated tabs" to the right-click menus.
+- `www.google.com` and `gstatic.com`: load site icons from Google's favicon service.
 
-You have complete control over your data:
+The next version adds two permissions:
 
-- **View**: See all your saved sessions and tabs
-- **Export**: Download your data in JSON format
-- **Import**: Restore data from backup files
-- **Delete**: Remove individual sessions or clear all data
-- **Uninstall**: Remove the extension and all associated data
+- **unlimitedStorage**: keep large collections, without Chrome's 10 MB limit.
+- **alarms**: run sync every 15 minutes, when sync is on.
 
-## Children's Privacy
+## Children
 
-Our extension does not knowingly collect information from children under 13. The extension treats all users the same regardless of age, storing only the tab information they choose to save locally.
+The extension is not for children under 13, and we do not knowingly collect their data.
 
-## Changes to Privacy Policy
+## Changes
 
-We may update this privacy policy occasionally. Any changes will be posted in our GitHub repository and reflected in the extension listing.
+We post changes to this policy on this page, with a new date at the top.
 
-## Contact Information
+## Contact
 
-If you have questions about this privacy policy, please:
-
-- Open an issue on our [GitHub repository](https://github.com/ajhsu/i-hate-tabs/issues)
-- Contact us through the Chrome Web Store developer information
-
-## Permissions Explanation
-
-The extension requests the following permissions:
-
-- **tabs**: To read tab information (URL, title, favicon) when you choose to save them
-- **storage**: To save your tab sessions locally on your device
-- **contextMenus**: To provide right-click menu options
-- **activeTab**: To interact with the currently active tab
-
-These permissions are used solely for the extension's core functionality and do not enable any data collection or transmission.
+Questions? [Open an issue on GitHub](https://github.com/ajhsu/i-hate-tabs/issues).
