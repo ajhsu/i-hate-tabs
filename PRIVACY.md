@@ -34,7 +34,7 @@ Smart naming runs on your computer. It does not send your tabs to any AI service
 
 ## The website
 
-The website at ihatetabs.com has no cookies, no analytics, and no third-party scripts or fonts. Its hosting provider processes each request to deliver the pages and to protect them from attacks.
+The website at ihatetabs.com uses Cloudflare Web Analytics to count page views. It sets no cookies, and it does not follow you to other sites. It records the page, the site that sent you, and your browser and device type. It also records your country, and how fast the page loaded. The website has no other analytics and no third-party fonts. Its host, Cloudflare, also processes each request to deliver the pages and to protect them from attacks.
 
 ## What we do not do
 
