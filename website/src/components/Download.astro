@@ -1,0 +1,33 @@
+---
+import { SITE } from '../consts';
+import ChromeButton from './ChromeButton.astro';
+---
+
+<section
+  class="relative overflow-hidden px-6 py-28"
+  id="download"
+  aria-labelledby="download-title"
+>
+  <div class="glow" aria-hidden="true"></div>
+  <div class="relative mx-auto max-w-3xl text-center">
+    <h2
+      id="download-title"
+      class="text-3xl font-bold tracking-tight md:text-5xl"
+    >
+      Ready to close some tabs?
+    </h2>
+    <p class="mt-5 text-lg text-text-secondary">
+      Free, with no ads. No account needed.
+    </p>
+    <div class="mt-10">
+      <ChromeButton />
+    </div>
+    <p class="mt-10 text-text-secondary">
+      Questions, ideas, or problems? <a
+        href={SITE.support}
+        class="font-semibold text-accent-hover underline underline-offset-4 hover:text-text-primary"
+        >Tell us on GitHub</a
+      >.
+    </p>
+  </div>
+</section>

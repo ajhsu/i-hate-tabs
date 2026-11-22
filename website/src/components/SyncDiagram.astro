@@ -1,0 +1,184 @@
+<figure class="sync screen motion relative bg-surface" data-motion>
+  <div
+    class="sync-stage"
+    role="img"
+    aria-label="Diagram: a laptop, your account in the cloud, and a desktop computer. Saved tabs travel from the laptop to your account, and from your account to the desktop."
+  >
+    <div class="node" aria-hidden="true">
+      <svg viewBox="0 0 64 48" aria-hidden="true">
+        <rect
+          x="10"
+          y="6"
+          width="44"
+          height="30"
+          rx="3"
+          fill="#1b1b2a"
+          stroke="#a3a3bd"
+          stroke-width="2.5"></rect>
+        <path d="M3 40h58l-4 5H7z" fill="#a3a3bd"></path>
+        <rect x="16" y="12" width="20" height="3" rx="1.5" fill="#a29bfe"
+        ></rect>
+        <rect x="16" y="19" width="30" height="3" rx="1.5" fill="#3a3a55"
+        ></rect>
+        <rect x="16" y="26" width="24" height="3" rx="1.5" fill="#3a3a55"
+        ></rect>
+      </svg>
+      <span>Laptop</span>
+    </div>
+    <div class="link" aria-hidden="true">
+      <i style="--d: 0s"></i><i style="--d: -0.8s"></i><i style="--d: -1.6s"
+      ></i>
+    </div>
+    <div class="node" aria-hidden="true">
+      <svg viewBox="0 0 64 48" aria-hidden="true">
+        <path
+          d="M18 41h29a10 10 0 0 0 1.5-19.9A14 14 0 0 0 21.6 18 9.5 9.5 0 0 0 18 41z"
+          fill="rgb(108 92 231 / 0.25)"
+          stroke="#a29bfe"
+          stroke-width="2.5"
+          stroke-linejoin="round"></path>
+        <rect x="27" y="27" width="11" height="9" rx="2" fill="#a29bfe"></rect>
+        <path
+          d="M29.5 27v-2.5a3 3 0 0 1 6 0V27"
+          fill="none"
+          stroke="#a29bfe"
+          stroke-width="2"></path>
+      </svg>
+      <span>Your account</span>
+    </div>
+    <div class="link" aria-hidden="true">
+      <i style="--d: -0.4s"></i><i style="--d: -1.2s"></i><i style="--d: -2s"
+      ></i>
+    </div>
+    <div class="node" aria-hidden="true">
+      <svg viewBox="0 0 64 48" aria-hidden="true">
+        <rect
+          x="6"
+          y="4"
+          width="52"
+          height="32"
+          rx="3"
+          fill="#1b1b2a"
+          stroke="#a3a3bd"
+          stroke-width="2.5"></rect>
+        <path d="M26 36h12l2 7H24z" fill="#a3a3bd"></path>
+        <rect x="20" y="43" width="24" height="3" rx="1.5" fill="#a3a3bd"
+        ></rect>
+        <rect x="12" y="10" width="20" height="3" rx="1.5" fill="#a29bfe"
+        ></rect>
+        <rect x="12" y="17" width="34" height="3" rx="1.5" fill="#3a3a55"
+        ></rect>
+        <rect x="12" y="24" width="28" height="3" rx="1.5" fill="#3a3a55"
+        ></rect>
+      </svg>
+      <span>Desktop</span>
+    </div>
+  </div>
+  <p class="sync-note">Sync is off until you sign in.</p>
+  <button type="button" class="motion-toggle" hidden>Pause</button>
+</figure>
+
+<style>
+  .sync-stage {
+    container-type: inline-size;
+    aspect-ratio: 1350 / 840;
+    display: grid;
+    grid-template-columns: 1fr 0.75fr 1fr 0.75fr 1fr;
+    align-items: center;
+    padding: 0 5%;
+    background:
+      radial-gradient(
+        60% 60% at 50% 40%,
+        rgb(108 92 231 / 0.16),
+        transparent 70%
+      ),
+      #14141f;
+  }
+  .node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.4cqw;
+    color: #f0f0f5;
+    font-size: 2.9cqw;
+    font-weight: 700;
+    text-align: center;
+  }
+  .node svg {
+    width: 100%;
+  }
+  .link {
+    position: relative;
+    height: 3.2cqw;
+    margin-bottom: 7cqw;
+    background: linear-gradient(#3a3a55, #3a3a55) center / 100% 0.45cqw
+      no-repeat;
+  }
+  .link i {
+    position: absolute;
+    top: 0;
+    left: calc(50% - 2.3cqw);
+    width: 4.6cqw;
+    height: 3.2cqw;
+    display: grid;
+    place-items: center;
+    border: 0.35cqw solid #a29bfe;
+    border-radius: 0.9cqw 0.9cqw 0.3cqw 0.3cqw;
+    background: #2f2f48;
+  }
+  .link i::after {
+    content: '';
+    width: 1.2cqw;
+    height: 1.2cqw;
+    border-radius: 50%;
+    background: #feca57;
+  }
+  .link i:nth-child(2)::after {
+    background: #48dbfb;
+  }
+  .link i:nth-child(3)::after {
+    background: #ff6b6b;
+  }
+  .link i:not(:first-child) {
+    display: none;
+  }
+  .sync-note {
+    position: absolute;
+    left: 50%;
+    bottom: 7%;
+    transform: translateX(-50%);
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    background: rgb(10 10 15 / 0.8);
+    box-shadow: 0 0 0 1px rgb(255 255 255 / 0.12);
+    color: #a3a3bd;
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .link i,
+    .link i:not(:first-child) {
+      display: grid;
+      left: 0;
+      opacity: 0;
+      animation: travel 2.4s linear infinite;
+      animation-delay: var(--d);
+    }
+  }
+
+  @keyframes travel {
+    0% {
+      left: 0;
+      opacity: 0;
+    }
+    15%,
+    85% {
+      opacity: 1;
+    }
+    100% {
+      left: calc(100% - 4.6cqw);
+      opacity: 0;
+    }
+  }
+</style>

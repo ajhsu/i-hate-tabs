@@ -1,0 +1,38 @@
+---
+import type { ImageMetadata } from 'astro';
+import { getImage } from 'astro:assets';
+
+interface Props {
+  poster: ImageMetadata;
+  av1: string;
+  h264: string;
+  /** What the video shows, for screen readers. */
+  label: string;
+}
+
+const { poster, av1, h264, label } = Astro.props;
+const still = await getImage({
+  src: poster,
+  format: 'webp',
+  width: poster.width,
+  quality: 80,
+});
+---
+
+<figure class="motion screen relative bg-surface" data-motion>
+  <video
+    class="block h-auto w-full"
+    width={poster.width}
+    height={poster.height}
+    poster={still.src}
+    muted
+    loop
+    playsinline
+    preload="none"
+    aria-label={label}
+  >
+    <source src={av1} type='video/mp4; codecs="av01.0.05M.08"' />
+    <source src={h264} type="video/mp4" />
+  </video>
+  <button type="button" class="motion-toggle" hidden>Pause</button>
+</figure>

@@ -1,0 +1,522 @@
+---
+import { Image, Picture } from 'astro:assets';
+import icon from '../assets/icon.png';
+import list from '../assets/screens/list.png';
+
+const colors = [
+  '#ff6b6b',
+  '#feca57',
+  '#48dbfb',
+  '#1dd1a1',
+  '#a29bfe',
+  '#ff9ff3',
+  '#54a0ff',
+  '#00d2d3',
+  '#ee5253',
+  '#10ac84',
+  '#f368e0',
+  '#ff9f43',
+];
+const tabs = Array.from(
+  { length: 24 },
+  (_, i) => colors[(i * 5) % colors.length]
+);
+---
+
+<figure class="hero-demo motion" data-motion>
+  <div
+    class="hd-window"
+    role="img"
+    aria-label="Animation: a browser window with 24 open tabs. A click on the I Hate Tabs button closes all of them. Then one tab is left, and it shows the list of saved tabs."
+  >
+    <div class="hd-bar" aria-hidden="true">
+      <span class="hd-lights"><i></i><i></i><i></i></span>
+      <span class="hd-tabs">
+        {
+          tabs.map((color, i) => (
+            <span class="hd-tab" style={`--i: ${i}; --c: ${color}`}></span>
+          ))
+        }
+        <span class="hd-single">
+          <Image src={icon} alt="" width={32} height={32} />
+          I Hate Tabs
+          <b>×</b>
+        </span>
+      </span>
+      <span class="hd-action">
+        <Image src={icon} alt="" width={48} height={48} />
+        <b class="hd-badge"><span class="hd-b5">5</span><span class="hd-b4">4</span></b>
+      </span>
+    </div>
+    <div class="hd-page" aria-hidden="true">
+      <div class="hd-list">
+        <Picture
+          src={list}
+          alt=""
+          formats={['avif', 'webp']}
+          widths={[560, 1120, 1680, 2240]}
+          sizes="(min-width: 1168px) 1120px, calc(100vw - 48px)"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+      <div class="hd-mess">
+        <i class="m-nav"></i>
+        <i class="m-title"></i>
+        <span class="m-cards"><i></i><i></i><i></i></span>
+        <i class="m-line"></i>
+        <i class="m-line"></i>
+        <i class="m-line short"></i>
+      </div>
+      <div class="hd-meter">Memory <i><b></b></i></div>
+    </div>
+    <svg class="hd-cursor" viewBox="0 0 22 30" aria-hidden="true">
+      <path
+        d="M2 2 L2 24 L7.5 18.5 L11.5 27.5 L15 26 L11 17 L18.5 17 Z"
+        fill="#000"
+        stroke="#fff"
+        stroke-width="1.6"
+        stroke-linejoin="round"></path>
+    </svg>
+    <span class="hd-ripple" aria-hidden="true"></span>
+  </div>
+  <figcaption class="mt-5 text-center text-sm text-text-secondary">
+    One click: 24 open tabs become one list.
+  </figcaption>
+  <button type="button" class="motion-toggle hd-toggle" hidden>Pause</button>
+</figure>
+
+<style>
+  .hero-demo {
+    position: relative;
+  }
+  .hd-window {
+    position: relative;
+    container-type: inline-size;
+    aspect-ratio: 1120 / 588;
+    overflow: hidden;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow:
+      0 0 0 1px rgb(255 255 255 / 0.1),
+      0 30px 80px rgb(0 0 0 / 0.55);
+  }
+  .hd-bar {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 3.57cqw;
+    background: #dee1e6;
+  }
+  .hd-lights {
+    position: absolute;
+    left: 1.43cqw;
+    top: 1.25cqw;
+    display: flex;
+    gap: 0.71cqw;
+  }
+  .hd-lights i {
+    width: 1.07cqw;
+    height: 1.07cqw;
+    border-radius: 50%;
+    background: #ff5f57;
+  }
+  .hd-lights i:nth-child(2) {
+    background: #febc2e;
+  }
+  .hd-lights i:nth-child(3) {
+    background: #28c840;
+  }
+  .hd-tabs {
+    position: absolute;
+    left: 7.5cqw;
+    right: 5.6cqw;
+    bottom: 0;
+    height: 2.86cqw;
+    display: flex;
+    gap: 0.14cqw;
+    overflow: hidden;
+  }
+  .hd-tab {
+    flex: 1;
+    display: grid;
+    place-items: center;
+    border-radius: 0.6cqw 0.6cqw 0 0;
+    background: #f1f3f4;
+    opacity: 0;
+  }
+  .hd-tab::before {
+    content: '';
+    width: 1.1cqw;
+    height: 1.1cqw;
+    border-radius: 50%;
+    background: var(--c);
+  }
+  .hd-single {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 21cqw;
+    height: 2.86cqw;
+    display: flex;
+    align-items: center;
+    gap: 0.7cqw;
+    padding: 0 1cqw;
+    border-radius: 0.9cqw 0.9cqw 0 0;
+    background: #fff;
+    color: #3c4043;
+    font-size: 1.12cqw;
+  }
+  .hd-single :global(img) {
+    width: 1.43cqw;
+    height: 1.43cqw;
+  }
+  .hd-single b {
+    margin-left: auto;
+    font-weight: 400;
+    color: #5f6368;
+  }
+  .hd-action {
+    position: absolute;
+    right: 1.43cqw;
+    top: 0.45cqw;
+    width: 2.68cqw;
+    height: 2.68cqw;
+    display: grid;
+    place-items: center;
+    border-radius: 0.7cqw;
+    background: rgb(255 255 255 / 0.9);
+    box-shadow: 0 0 0 0.27cqw rgb(108 92 231 / 0.75);
+  }
+  .hd-action :global(img) {
+    width: 1.8cqw;
+    height: 1.8cqw;
+  }
+  .hd-badge {
+    position: absolute;
+    right: -0.6cqw;
+    bottom: -0.45cqw;
+    min-width: 1.45cqw;
+    padding: 0 0.3cqw;
+    border: 0.13cqw solid #dee1e6;
+    border-radius: 0.7cqw;
+    background: #3498db;
+    color: #fff;
+    font-size: 0.9cqw;
+    font-weight: 700;
+    line-height: 1.15cqw;
+    text-align: center;
+  }
+  .hd-badge span {
+    display: block;
+  }
+  .hd-b4 {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+  }
+  .hd-page {
+    position: absolute;
+    inset: 3.57cqw 0 0;
+    background: #fff;
+  }
+  .hd-list,
+  .hd-list :global(img) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .hd-mess {
+    position: absolute;
+    inset: 0;
+    padding: 3cqw 6cqw;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6cqw;
+    opacity: 0;
+  }
+  .hd-mess i {
+    display: block;
+    border-radius: 0.8cqw;
+    background: #eceef2;
+  }
+  .m-nav {
+    height: 2.6cqw;
+  }
+  .m-title {
+    width: 46%;
+    height: 3.2cqw;
+    background: #dfe2e8 !important;
+  }
+  .m-cards {
+    display: flex;
+    gap: 2cqw;
+  }
+  .m-cards i {
+    flex: 1;
+    height: 15cqw;
+    background: linear-gradient(#ffd6d6 0 38%, #f3f4f7 38%) !important;
+  }
+  .m-cards i:nth-child(2) {
+    background: linear-gradient(#d6ecff 0 38%, #f3f4f7 38%) !important;
+  }
+  .m-cards i:nth-child(3) {
+    background: linear-gradient(#e2f7d8 0 38%, #f3f4f7 38%) !important;
+  }
+  .m-line {
+    height: 1.4cqw;
+  }
+  .m-line.short {
+    width: 60%;
+  }
+  .hd-meter {
+    position: absolute;
+    left: 2cqw;
+    bottom: 2cqw;
+    display: flex;
+    align-items: center;
+    gap: 0.9cqw;
+    padding: 0.8cqw 1.3cqw;
+    border-radius: 99px;
+    background: rgb(20 20 31 / 0.9);
+    color: #f0f0f5;
+    font-size: 1.2cqw;
+    font-weight: 700;
+    box-shadow: 0 0.6cqw 2cqw rgb(0 0 0 / 0.3);
+  }
+  .hd-meter i {
+    display: block;
+    width: 10cqw;
+    height: 0.9cqw;
+    overflow: hidden;
+    border-radius: 99px;
+    background: rgb(255 255 255 / 0.18);
+  }
+  .hd-meter b {
+    display: block;
+    width: 16%;
+    height: 100%;
+    border-radius: inherit;
+    background: #00cec9;
+  }
+  .hd-cursor {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2cqw;
+    opacity: 0;
+    transform-origin: 0 0;
+    filter: drop-shadow(0 0.2cqw 0.3cqw rgb(0 0 0 / 0.35));
+  }
+  .hd-ripple {
+    position: absolute;
+    left: 97.23cqw;
+    top: 1.79cqw;
+    width: 3.6cqw;
+    height: 3.6cqw;
+    margin: -1.8cqw 0 0 -1.8cqw;
+    border-radius: 50%;
+    background: rgb(108 92 231 / 0.45);
+    opacity: 0;
+  }
+  .hd-toggle {
+    bottom: 2.75rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hd-tab {
+      animation: hd-tab 10s infinite backwards;
+      animation-delay: calc(var(--i) * 35ms);
+    }
+    .hd-single {
+      animation: hd-single 10s infinite;
+    }
+    .hd-mess {
+      animation: hd-mess 10s infinite;
+    }
+    .hd-list {
+      animation: hd-list 10s infinite;
+    }
+    .hd-meter b {
+      animation: hd-meter 10s infinite;
+    }
+    .hd-b4 {
+      animation: hd-b4 10s infinite;
+    }
+    .hd-b5 {
+      animation: hd-b5 10s infinite;
+    }
+    .hd-cursor {
+      animation: hd-cursor 10s infinite;
+    }
+    .hd-ripple {
+      animation: hd-ripple 10s infinite;
+    }
+    .hd-action {
+      animation: hd-press 10s infinite;
+    }
+  }
+
+  @keyframes hd-tab {
+    0%,
+    19% {
+      opacity: 1;
+      transform: none;
+    }
+    25%,
+    93% {
+      opacity: 0;
+      transform: translateY(1.4cqw) scale(0.3);
+    }
+    98%,
+    100% {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes hd-single {
+    0%,
+    26% {
+      transform: translateY(110%);
+    }
+    31%,
+    91% {
+      transform: none;
+    }
+    95%,
+    100% {
+      transform: translateY(110%);
+    }
+  }
+  @keyframes hd-mess {
+    0%,
+    27% {
+      opacity: 1;
+    }
+    33%,
+    92% {
+      opacity: 0;
+    }
+    97%,
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes hd-list {
+    0%,
+    27% {
+      opacity: 0;
+    }
+    33%,
+    92% {
+      opacity: 1;
+    }
+    97%,
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes hd-meter {
+    0%,
+    20% {
+      width: 88%;
+      background: #ff6b6b;
+    }
+    30%,
+    92% {
+      width: 16%;
+      background: #00cec9;
+    }
+    98%,
+    100% {
+      width: 88%;
+      background: #ff6b6b;
+    }
+  }
+  @keyframes hd-b4 {
+    0%,
+    23% {
+      opacity: 1;
+    }
+    25%,
+    95% {
+      opacity: 0;
+    }
+    97%,
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes hd-b5 {
+    0%,
+    23% {
+      opacity: 0;
+    }
+    25%,
+    95% {
+      opacity: 1;
+    }
+    97%,
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes hd-cursor {
+    0% {
+      opacity: 0;
+      transform: translate(62cqw, 34cqw);
+    }
+    5% {
+      opacity: 1;
+      transform: translate(62cqw, 34cqw);
+    }
+    16% {
+      transform: translate(97.05cqw, 1.66cqw);
+    }
+    17.5% {
+      transform: translate(97.05cqw, 1.66cqw) scale(0.85);
+    }
+    19% {
+      opacity: 1;
+      transform: translate(97.05cqw, 1.66cqw);
+    }
+    38% {
+      opacity: 1;
+      transform: translate(88cqw, 10cqw);
+    }
+    44%,
+    100% {
+      opacity: 0;
+      transform: translate(88cqw, 10cqw);
+    }
+  }
+  @keyframes hd-ripple {
+    0%,
+    17% {
+      opacity: 0;
+      transform: scale(0.3);
+    }
+    18% {
+      opacity: 0.7;
+      transform: scale(0.5);
+    }
+    26%,
+    100% {
+      opacity: 0;
+      transform: scale(1.6);
+    }
+  }
+  @keyframes hd-press {
+    0%,
+    17% {
+      transform: none;
+    }
+    18.5% {
+      transform: scale(0.9);
+    }
+    21%,
+    100% {
+      transform: none;
+    }
+  }
+</style>

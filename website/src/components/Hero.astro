@@ -1,0 +1,65 @@
+---
+import ChromeButton from './ChromeButton.astro';
+import HeroDemo from './HeroDemo.astro';
+
+const promises = [
+  'Free, with no ads',
+  'No account needed',
+  'Optional sync',
+  'Handles thousands of tabs',
+];
+---
+
+<section
+  class="relative overflow-hidden px-6 pt-20 pb-20 md:pt-28"
+  aria-labelledby="hero-title"
+>
+  <div class="glow" aria-hidden="true"></div>
+  <div class="relative mx-auto max-w-3xl text-center">
+    <p class="eyebrow">A Chrome extension for people with too many tabs</p>
+    <h1
+      id="hero-title"
+      class="mt-5 text-5xl font-extrabold tracking-tight md:text-7xl"
+    >
+      Too many tabs open? <span class="text-gradient">You are not alone.</span>
+    </h1>
+    <p class="mx-auto mt-6 max-w-2xl text-lg text-text-secondary md:text-xl">
+      One click saves all your tabs to one list, and closes them. Your computer
+      gets its memory back. (You will probably never read those tabs. That is
+      OK.)
+    </p>
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+      <ChromeButton />
+      <a href="#how-it-works" class="btn-secondary">How it works</a>
+    </div>
+    <ul
+      class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-text-secondary"
+    >
+      {
+        promises.map(promise => (
+          <li class="flex items-center gap-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="text-accent-hover"
+              aria-hidden="true"
+            >
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            {promise}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+  <div class="relative mx-auto mt-16 max-w-[1120px]">
+    <HeroDemo />
+  </div>
+</section>

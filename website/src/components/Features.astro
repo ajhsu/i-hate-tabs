@@ -1,0 +1,164 @@
+---
+import dragAv1 from '../assets/clips/drag.av1.mp4?url';
+import dragH264 from '../assets/clips/drag.h264.mp4?url';
+import dragPoster from '../assets/clips/drag.png';
+import duplicatesAv1 from '../assets/clips/duplicates.av1.mp4?url';
+import duplicatesH264 from '../assets/clips/duplicates.h264.mp4?url';
+import duplicatesPoster from '../assets/clips/duplicates.png';
+import searchAv1 from '../assets/clips/search.av1.mp4?url';
+import searchH264 from '../assets/clips/search.h264.mp4?url';
+import searchPoster from '../assets/clips/search.png';
+import Clip from './Clip.astro';
+import SyncDiagram from './SyncDiagram.astro';
+
+const rows = [
+  {
+    eyebrow: 'Search',
+    title: 'Find that tab from three weeks ago.',
+    text: 'Type a word. The list then shows only the sessions with that word in a title or an address.',
+    clip: {
+      poster: searchPoster,
+      av1: searchAv1,
+      h264: searchH264,
+      label:
+        'Video: the word hotel goes into the search box. The list changes, and shows only the two sessions with hotel tabs.',
+    },
+  },
+  {
+    eyebrow: 'Duplicates',
+    title: 'You saved it three times. We noticed.',
+    text: 'Show Duplicates marks the extra copies. Close Duplicates removes them, in one session or in all sessions.',
+    clip: {
+      poster: duplicatesPoster,
+      av1: duplicatesAv1,
+      h264: duplicatesH264,
+      label:
+        'Video: Show Duplicates marks the tabs that are saved more than once, such as a headphones page. Close Duplicates opens a dialog. After one more click, the extra copies are gone.',
+    },
+  },
+  {
+    eyebrow: 'Optional sync',
+    title: 'Now you can have too many tabs on every computer.',
+    text: 'Sign in with the same account on each computer, and your sessions appear on all of them.',
+    clip: null,
+  },
+  {
+    eyebrow: 'Drag and drop',
+    title: 'Put each tab where it belongs.',
+    text: 'Drag a tab from one session to another. You can also rename sessions, and sort their tabs from A to Z.',
+    clip: {
+      poster: dragPoster,
+      av1: dragAv1,
+      h264: dragH264,
+      label:
+        'Video: a tab for a bed frame moves from the session Work stuff to the session Shopping.',
+    },
+  },
+];
+
+const icons = {
+  sparkles:
+    '<path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/>',
+  moon: '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>',
+  pointer: '<path d="M4 4l7 17 2.5-7.5L21 11z"/>',
+  open: '<path d="M15 3h6v6M10 14L21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>',
+  save: '<path d="M12 3v12M7 10l5 5 5-5M5 21h14"/>',
+  zap: '<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>',
+};
+
+const extras = [
+  {
+    icon: icons.sparkles,
+    title: 'Smart names',
+    text: 'It names each session from its tabs, like Shopping or News. This runs on your computer.',
+  },
+  {
+    icon: icons.pointer,
+    title: 'Right-click to save',
+    text: 'Right-click any page and choose Save all tabs. The toolbar button shows how many sessions you have.',
+  },
+  {
+    icon: icons.open,
+    title: 'Close After Open',
+    text: 'Turn it on, and a tab leaves the list when you open it.',
+  },
+  {
+    icon: icons.moon,
+    title: 'Light or dark',
+    text: 'It follows the theme of your system, or you choose. Show page titles or full addresses.',
+  },
+  {
+    icon: icons.save,
+    title: 'Backup file',
+    text: 'Save all your sessions to a JSON file, and import them again on any computer.',
+  },
+  {
+    icon: icons.zap,
+    title: 'Thousands of tabs',
+    text: 'Big lists load a few sessions at a time, so the page stays fast.',
+  },
+];
+---
+
+<section class="px-6 py-24" id="features" aria-labelledby="features-title">
+  <div class="mx-auto max-w-6xl">
+    <p class="eyebrow text-center">Features</p>
+    <h2
+      id="features-title"
+      class="mt-3 text-center text-3xl font-bold tracking-tight md:text-5xl"
+    >
+      Made for people with 200 open tabs.
+    </h2>
+
+    <div class="mt-16 space-y-24">
+      {
+        rows.map((row, i) => (
+          <article class="grid items-center gap-10 lg:grid-cols-5 lg:gap-14">
+            <div class:list={['lg:col-span-2', i % 2 === 1 && 'lg:order-2']}>
+              <p class="eyebrow">{row.eyebrow}</p>
+              <h3 class="mt-3 text-2xl font-bold tracking-tight md:text-3xl">
+                {row.title}
+              </h3>
+              <p class="mt-5 text-lg leading-relaxed text-text-secondary">
+                {row.text}
+              </p>
+            </div>
+            <div class="lg:col-span-3">
+              {row.clip ? <Clip {...row.clip} /> : <SyncDiagram />}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <h3 class="mt-28 text-center text-2xl font-bold tracking-tight">
+      Small things that help
+    </h3>
+    <ul class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        extras.map(extra => (
+          <li class="flex gap-4 rounded-2xl border border-border bg-surface p-6">
+            <svg
+              class="size-7 flex-none text-accent-hover"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <Fragment set:html={extra.icon} />
+            </svg>
+            <div>
+              <h4 class="font-bold">{extra.title}</h4>
+              <p class="mt-1.5 text-sm leading-relaxed text-text-secondary">
+                {extra.text}
+              </p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,155 @@
+---
+const flows = [
+  {
+    to: 'Advertisers and data sellers',
+    when: 'Never',
+    what: 'There are no ads, and we do not sell your tabs to anyone.',
+    line: 'never',
+  },
+  {
+    to: 'AI services',
+    when: 'Never',
+    what: 'Smart session names are made on your computer. Your tabs do not go to any AI service.',
+    line: 'never',
+  },
+  {
+    to: 'Your account (Firebase, by Google)',
+    when: 'Only if you sign in',
+    what: 'A copy of your sessions, for sync between your computers. Only your account can read it, and you can delete it.',
+    line: 'dashed',
+  },
+];
+
+const permissions = [
+  {
+    name: 'tabs',
+    why: 'Read the address, title, and icon of the tabs in the window when you save them, and open them again later.',
+  },
+  {
+    name: 'storage',
+    why: 'Keep your sessions and settings in your browser.',
+  },
+  {
+    name: 'activeTab',
+    why: 'Work with the current window when you click the toolbar button or the menu item.',
+  },
+  {
+    name: 'contextMenus',
+    why: 'Add “Save all tabs” and “Show hated tabs” to the right-click menus.',
+  },
+  {
+    name: 'www.google.com, gstatic.com',
+    why: 'Load site icons from Google’s favicon service, for imported tabs and when you refresh icons.',
+  },
+];
+---
+
+<section
+  class="border-y border-border bg-surface/40 px-6 py-24"
+  id="privacy"
+  aria-labelledby="privacy-title"
+>
+  <div class="mx-auto max-w-6xl">
+    <p class="eyebrow text-center">Privacy</p>
+    <h2
+      id="privacy-title"
+      class="mt-3 text-center text-3xl font-bold tracking-tight md:text-5xl"
+    >
+      Your tabs are yours.
+    </h2>
+    <p class="mx-auto mt-5 max-w-2xl text-center text-lg text-text-secondary">
+      This is where your tabs go. Short version: they stay in your browser.
+    </p>
+
+    <div
+      class="mt-14 grid items-center gap-6 lg:grid-cols-[minmax(0,20rem)_1fr] lg:gap-0"
+    >
+      <div
+        class="rounded-2xl border border-accent-hover/40 bg-bg p-7 text-center shadow-[0_0_60px_rgba(108,92,231,0.18)]"
+      >
+        <svg
+          class="mx-auto size-14 text-accent-hover"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <rect x="4" y="11" width="16" height="10" rx="2"></rect>
+          <path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
+        </svg>
+        <h3 class="mt-4 text-xl font-bold">Your browser</h3>
+        <p class="mt-2 leading-relaxed text-text-secondary">
+          Your saved tabs stay here: their addresses, titles, icons, and your
+          sessions.
+        </p>
+      </div>
+      <ol class="space-y-4" aria-label="Where your tabs go">
+        {
+          flows.map(flow => (
+            <li class="grid grid-cols-[2.5rem_1fr] items-center sm:grid-cols-[6rem_1fr]">
+              <span class:list={['flow', flow.line]} aria-hidden="true"></span>
+              <div class="rounded-xl border border-border bg-bg p-4">
+                <p class="flex flex-wrap items-center gap-x-3 gap-y-1">
+                  <span
+                    class:list={[
+                      'rounded-full px-2.5 py-0.5 text-xs font-semibold',
+                      flow.line === 'never'
+                        ? 'bg-fun/15 text-fun'
+                        : 'bg-accent/20 text-accent-hover',
+                    ]}
+                  >
+                    {flow.when}
+                  </span>
+                  <span class="sr-only">: </span>
+                  <strong>{flow.to}</strong>
+                </p>
+                <p class="mt-1.5 text-sm leading-relaxed text-text-secondary">
+                  {flow.what}
+                </p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+
+    <div class="mt-16 rounded-2xl border border-border bg-bg p-7 md:p-10">
+      <h3 class="text-xl font-bold">What it asks Chrome for, and why</h3>
+      <p class="mt-2 text-text-secondary">
+        Chrome shows these permissions before you install.
+      </p>
+      <dl class="mt-8 divide-y divide-border">
+        {
+          permissions.map(permission => (
+            <div class="grid gap-1 py-4 md:grid-cols-[16rem_1fr] md:gap-6">
+              <dt class="font-mono text-sm font-semibold text-accent-hover">
+                {permission.name}
+              </dt>
+              <dd class="leading-relaxed text-text-secondary">
+                {permission.why}
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+      <p class="mt-6 text-sm leading-relaxed text-text-secondary">
+        The next version adds two more: <code
+          class="font-mono text-text-primary">unlimitedStorage</code
+        >, so that your list can be bigger than Chrome’s 10 MB limit, and <code
+          class="font-mono text-text-primary">alarms</code
+        >, so that sync can run every 15 minutes.
+      </p>
+    </div>
+
+    <p class="mt-10 text-center">
+      <a
+        href="/privacy/"
+        class="font-semibold text-accent-hover underline underline-offset-4 hover:text-text-primary"
+        >Read the full privacy policy</a
+      >
+    </p>
+  </div>
+</section>

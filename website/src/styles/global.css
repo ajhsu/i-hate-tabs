@@ -1,0 +1,183 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-bg: #0a0a0f;
+  --color-surface: #14141f;
+  --color-border: #262638;
+  --color-text-primary: #f0f0f5;
+  --color-text-secondary: #a3a3bd;
+  --color-accent: #6c5ce7;
+  --color-accent-hover: #a29bfe;
+  --color-fun: #ff6b6b;
+  --font-mono:
+    'JetBrains Mono Variable', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    @apply bg-bg font-sans text-text-primary antialiased;
+  }
+
+  ::selection {
+    background: rgb(108 92 231 / 0.35);
+  }
+
+  a,
+  summary {
+    @apply rounded-sm;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent-hover);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      transition: none !important;
+    }
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center gap-3 rounded-lg bg-accent px-7 py-3.5 text-lg font-bold whitespace-nowrap text-white transition hover:bg-[#7d6ef0] hover:shadow-[0_0_28px_rgba(108,92,231,0.45)];
+  }
+
+  .btn-small {
+    @apply gap-2 px-4 py-2 text-sm;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 rounded-lg border border-border px-6 py-3.5 text-lg font-semibold text-text-primary transition hover:border-accent-hover hover:text-accent-hover;
+  }
+
+  .text-gradient {
+    background: linear-gradient(
+      90deg,
+      var(--color-accent-hover),
+      var(--color-fun)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .glow {
+    @apply pointer-events-none absolute inset-0;
+    background:
+      radial-gradient(
+        60% 45% at 20% 0%,
+        rgb(108 92 231 / 0.35),
+        transparent 70%
+      ),
+      radial-gradient(
+        45% 35% at 90% 25%,
+        rgb(255 107 107 / 0.14),
+        transparent 70%
+      );
+  }
+
+  .screen {
+    @apply overflow-hidden rounded-[14px];
+    box-shadow:
+      0 0 0 1px rgb(255 255 255 / 0.1),
+      0 30px 80px rgb(0 0 0 / 0.55);
+  }
+
+  .motion-toggle {
+    @apply absolute right-3 bottom-3 z-10 rounded-full bg-bg/80 px-3 py-1 text-xs font-semibold text-text-primary ring-1 ring-white/20 backdrop-blur transition hover:bg-bg;
+  }
+
+  .is-paused,
+  .is-paused * {
+    animation-play-state: paused !important;
+  }
+
+  /* An arrow from "Your browser" to where the data goes. */
+  .flow {
+    @apply relative block h-0.5;
+    background: var(--color-accent-hover);
+  }
+
+  .flow::after {
+    content: '';
+    @apply absolute top-1/2 right-0 -translate-y-1/2;
+    border: 6px solid transparent;
+    border-right: 0;
+    border-left: 9px solid var(--color-accent-hover);
+  }
+
+  .flow.dashed {
+    background: repeating-linear-gradient(
+      90deg,
+      var(--color-accent-hover) 0 6px,
+      transparent 6px 11px
+    );
+  }
+
+  .flow.never {
+    background: var(--color-fun);
+  }
+
+  .flow.never::after {
+    border-left-color: var(--color-fun);
+  }
+
+  .flow.never::before {
+    content: '×';
+    @apply absolute top-1/2 left-1/2 grid size-5 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-fun text-sm leading-none font-bold text-bg;
+  }
+
+  .eyebrow {
+    @apply font-mono text-sm font-semibold tracking-wide text-accent-hover uppercase;
+  }
+
+  .prose {
+    @apply leading-relaxed text-text-secondary;
+  }
+
+  .prose h1 {
+    @apply mb-3 text-4xl font-extrabold tracking-tight text-text-primary md:text-5xl;
+  }
+
+  .prose h2 {
+    @apply mt-12 mb-4 text-2xl font-bold text-text-primary;
+  }
+
+  .prose p,
+  .prose ul {
+    @apply my-4;
+  }
+
+  .prose ul {
+    @apply list-disc space-y-2 pl-6;
+  }
+
+  .prose strong {
+    @apply text-text-primary;
+  }
+
+  .prose a {
+    @apply text-accent-hover underline underline-offset-2 hover:text-text-primary;
+  }
+
+  .prose code {
+    @apply rounded bg-surface px-1.5 py-0.5 font-mono text-sm text-text-primary;
+  }
+}
